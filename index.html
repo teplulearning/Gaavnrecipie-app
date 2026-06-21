@@ -26,19 +26,13 @@ pre{white-space:pre-wrap}
 <tr>
 <th>Vendor</th><th>BM Qty</th><th>BM Fat</th><th>BM SNF</th><th>CM Qty</th><th>CM Fat</th><th>CM SNF</th>
 </tr>
-<script>
-for(let i=1;i<=5;i++){
-document.write(`<tr>
-<td>Vendor ${i}</td>
-<td><input id="v${i}BmQty" type="number"></td>
-<td><input id="v${i}BmFat" type="number" step="0.01"></td>
-<td><input id="v${i}BmSnf" type="number" step="0.01"></td>
-<td><input id="v${i}CmQty" type="number"></td>
-<td><input id="v${i}CmFat" type="number" step="0.01"></td>
-<td><input id="v${i}CmSnf" type="number" step="0.01"></td>
-</tr>`);
-}
-</script>
+
+<tr><td>Vendor 1</td><td><input id="v1BmQty" type="number"></td><td><input id="v1BmFat" type="number" step="0.01"></td><td><input id="v1BmSnf" type="number" step="0.01"></td><td><input id="v1CmQty" type="number"></td><td><input id="v1CmFat" type="number" step="0.01"></td><td><input id="v1CmSnf" type="number" step="0.01"></td></tr>
+<tr><td>Vendor 2</td><td><input id="v2BmQty" type="number"></td><td><input id="v2BmFat" type="number" step="0.01"></td><td><input id="v2BmSnf" type="number" step="0.01"></td><td><input id="v2CmQty" type="number"></td><td><input id="v2CmFat" type="number" step="0.01"></td><td><input id="v2CmSnf" type="number" step="0.01"></td></tr>
+<tr><td>Vendor 3</td><td><input id="v3BmQty" type="number"></td><td><input id="v3BmFat" type="number" step="0.01"></td><td><input id="v3BmSnf" type="number" step="0.01"></td><td><input id="v3CmQty" type="number"></td><td><input id="v3CmFat" type="number" step="0.01"></td><td><input id="v3CmSnf" type="number" step="0.01"></td></tr>
+<tr><td>Vendor 4</td><td><input id="v4BmQty" type="number"></td><td><input id="v4BmFat" type="number" step="0.01"></td><td><input id="v4BmSnf" type="number" step="0.01"></td><td><input id="v4CmQty" type="number"></td><td><input id="v4CmFat" type="number" step="0.01"></td><td><input id="v4CmSnf" type="number" step="0.01"></td></tr>
+<tr><td>Vendor 5</td><td><input id="v5BmQty" type="number"></td><td><input id="v5BmFat" type="number" step="0.01"></td><td><input id="v5BmSnf" type="number" step="0.01"></td><td><input id="v5CmQty" type="number"></td><td><input id="v5CmFat" type="number" step="0.01"></td><td><input id="v5CmSnf" type="number" step="0.01"></td></tr>
+
 </table>
 <br>
 <button class="primary" onclick="calculateMilkPool()">Calculate Milk Pool</button>
