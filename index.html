@@ -3,425 +3,116 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
 <title>GAAVN Recipe Generator</title>
-
-<style>
-body{
-    font-family:Arial,sans-serif;
-    padding:20px;
-    background:#f5f5f5;
-}
-
-.card{
-    background:white;
-    padding:20px;
-    border-radius:12px;
-    margin-bottom:15px;
-    box-shadow:0 2px 6px rgba(0,0,0,.1);
-}
-
-input,select{
-    width:100%;
-    padding:10px;
-    margin-top:5px;
-    margin-bottom:15px;
-}
-
-button{
-    padding:12px 20px;
-    border:none;
-    border-radius:8px;
-    cursor:pointer;
-    margin-right:10px;
-}
-
-.primary{
-    background:#2e7d32;
-    color:white;
-}
-
-.secondary{
-    background:#1565c0;
-    color:white;
-}
-
-pre{
-    white-space:pre-wrap;
-}
+<script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=vIn5xRcFLdearRpSnzQYF3scCx7TP4waDPV6KVJxebLfcM_O2v_bP_Q2Bb2MrhK2lrlaWuE6V39DFENbYtz0olcWyjFEaJu_tnDMLMUfmU0gHFXWvsbnrcFftEVU5sJPhRabmLNYS8ZS5WCPPPV_TRiKopXndQDJ-pebWo9A20POCt0RbkDIBFPmW9FTroIPUconZAmkClbQ6axhVUsc9GxVCRJSL6iKmfRe-LQpACwLo3JRMSpAiseCN_yUUYnlYqvaAy_NXBUnjtwnBHTOc5TRHCUarcve6rakQracxf59SN5VDd3uRTAsq8Pn2tGjkEZaTcKo1zIVjX0Q0W7O9A" charset="UTF-8"></script><style>
+body{font-family:Arial,sans-serif;padding:20px;background:#f5f5f5}
+.card{background:#fff;padding:20px;border-radius:10px;margin-bottom:15px;box-shadow:0 2px 6px rgba(0,0,0,.1);overflow:auto}
+table{width:100%;border-collapse:collapse}
+th,td{border:1px solid #ddd;padding:5px;text-align:center}
+input,select{width:100%;padding:6px}
+button{padding:10px 15px;border:none;border-radius:6px;cursor:pointer}
+.primary{background:#2e7d32;color:#fff}
+.secondary{background:#1565c0;color:#fff}
+pre{white-space:pre-wrap}
 </style>
 </head>
-
 <body>
 
-<h2>GAAVN Recipe Generator</h2>
-<div class="card">
+<h2>GAAVN Recipe Generator V2</h2>
 
+<div class="card">
 <h3>Milk Procurement</h3>
-
-<table style="width:100%;border-collapse:collapse">
+<table>
 <tr>
-<th>Vendor</th>
-<th>Qty</th>
-<th>Fat</th>
-<th>SNF</th>
+<th>Vendor</th><th>BM Qty</th><th>BM Fat</th><th>BM SNF</th><th>CM Qty</th><th>CM Fat</th><th>CM SNF</th>
 </tr>
-
-<tr>
-<td>Vendor 1</td>
-<td><input type="number" id="v1Qty"></td>
-<td><input type="number" step="0.01" id="v1Fat"></td>
-<td><input type="number" step="0.01" id="v1Snf"></td>
-</tr>
-
-<tr>
-<td>Vendor 2</td>
-<td><input type="number" id="v2Qty"></td>
-<td><input type="number" step="0.01" id="v2Fat"></td>
-<td><input type="number" step="0.01" id="v2Snf"></td>
-</tr>
-
-<tr>
-<td>Vendor 3</td>
-<td><input type="number" id="v3Qty"></td>
-<td><input type="number" step="0.01" id="v3Fat"></td>
-<td><input type="number" step="0.01" id="v3Snf"></td>
-</tr>
-
-<tr>
-<td>Vendor 4 AM</td>
-<td><input type="number" id="v4aQty"></td>
-<td><input type="number" step="0.01" id="v4aFat"></td>
-<td><input type="number" step="0.01" id="v4aSnf"></td>
-</tr>
-
-<tr>
-<td>Vendor 4 PM</td>
-<td><input type="number" id="v4pQty"></td>
-<td><input type="number" step="0.01" id="v4pFat"></td>
-<td><input type="number" step="0.01" id="v4pSnf"></td>
-</tr>
-
+<script>
+for(let i=1;i<=5;i++){
+document.write(`<tr>
+<td>Vendor ${i}</td>
+<td><input id="v${i}BmQty" type="number"></td>
+<td><input id="v${i}BmFat" type="number" step="0.01"></td>
+<td><input id="v${i}BmSnf" type="number" step="0.01"></td>
+<td><input id="v${i}CmQty" type="number"></td>
+<td><input id="v${i}CmFat" type="number" step="0.01"></td>
+<td><input id="v${i}CmSnf" type="number" step="0.01"></td>
+</tr>`);
+}
+</script>
 </table>
-
-<hr>
-
-<h4>CM Procurement</h4>
-
-<label>CM Qty (L)</label>
-<input type="number" id="cmQty">
-
-<label>CM Fat %</label>
-<input type="number" step="0.01" id="cmFat">
-
-<label>CM SNF %</label>
-<input type="number" step="0.01" id="cmSnf">
-
-<button class="primary" onclick="calculateMilkPool()">
-Calculate Milk Pool
-</button>
-
-<hr>
-
+<br>
+<button class="primary" onclick="calculateMilkPool()">Calculate Milk Pool</button>
 <div id="milkSummary"></div>
-
 </div>
-<div class="card">
 
+<div class="card">
 <label>Product</label>
 <select id="product"></select>
-
 <label>Required Output</label>
 <input type="number" id="outputQty" value="100">
-
-<button class="primary" onclick="generateRecipe()">
-Generate Recipe
-</button>
-
+<button class="primary" onclick="generateRecipe()">Generate Recipe</button>
 </div>
 
 <div class="card">
-
 <h3>Recipe</h3>
-
 <pre id="recipeOutput"></pre>
-
-<button class="secondary" onclick="copyRecipe()">
-Copy Recipe
-</button>
-
+<button class="secondary" onclick="copyRecipe()">Copy Recipe</button>
 </div>
 
 <script>
-
-const recipes = {
-
-"Medium Fat Paneer":{
-    output:100,
-    unit:"kg",
-    ingredients:[
-        ["BM",100,"L"],
-        ["SM",595,"L"],
-        ["Cream",8.74,"kg"],
-        ["PS",0.291,"kg"],
-        ["CaCl2",0.417,"kg"],
-        ["AA",695,"ml"],
-        ["Water",139,"L"]
-    ]
-},
-
-"Malai Paneer":{
-    output:14,
-    unit:"kg",
-    ingredients:[
-        ["BM",25,"L"],
-        ["SM",15,"L"],
-        ["Cream",0.645,"kg"],
-        ["PS",0.0168,"kg"],
-        ["CaCl2",0.024,"kg"]
-    ]
-},
-
-"Lite Curd":{
-    output:100,
-    unit:"kg",
-    ingredients:[
-        ["SM",100,"L"],
-        ["SMP",2.6,"kg"],
-        ["Binder",10,"gm"],
-        ["CaCl2",0.03,"kg"]
-    ]
-},
-
-"Chaas":{
-    output:50,
-    unit:"L",
-    ingredients:[
-        ["Curd",19,"kg"],
-        ["Water",33,"L"],
-        ["White Salt",0.312,"kg"],
-        ["Black Salt",0.0078,"kg"]
-    ]
-},
-
-"Sweet Lassi":{
-    output:20,
-    unit:"kg",
-    ingredients:[
-        ["Curd",19,"kg"],
-        ["Syrup",7.98,"kg"],
-        ["Salt",0.01688,"kg"],
-        ["PS",0.01349,"kg"],
-        ["Flavour",18.8,"ml"]
-    ]
-},
-
-"Mango Lassi":{
-    output:20,
-    unit:"kg",
-    ingredients:[
-        ["Curd",15,"kg"],
-        ["Syrup",6.3,"kg"],
-        ["Pulp",0.852,"kg"],
-        ["Salt",0.01278,"kg"],
-        ["PS",0.01065,"kg"],
-        ["TR",10.65,"ml"],
-        ["OR",10.65,"ml"],
-        ["Flavour",10.65,"ml"]
-    ]
-},
-
-"CM Khoya":{
-    output:20,
-    unit:"kg",
-    ingredients:[
-        ["CM",49,"L"],
-        ["SM",11,"L"],
-        ["SMP",2,"kg"]
-    ]
-},
-
-"Shrikhand":{
-    output:20,
-    unit:"kg",
-    ingredients:[
-        ["Chakka",13.2,"kg"],
-        ["Sugar",9.9,"kg"],
-        ["Salt",0.01386,"kg"],
-        ["Flavour",0.05,"%"],
-        ["Cardamom",0.07,"%"]
-    ]
-}
-
+const recipes={
+"Medium Fat Paneer":{output:100,unit:"kg",ingredients:[["BM",100,"L"],["SM",595,"L"],["Cream",8.74,"kg"],["PS",0.291,"kg"],["CaCl2",0.417,"kg"],["AA",695,"ml"],["Water",139,"L"]]},
+"Malai Paneer":{output:14,unit:"kg",ingredients:[["BM",25,"L"],["SM",15,"L"],["Cream",0.645,"kg"],["PS",0.0168,"kg"],["CaCl2",0.024,"kg"]]},
+"Lite Curd":{output:100,unit:"kg",ingredients:[["SM",100,"L"],["SMP",2.6,"kg"],["Binder",10,"gm"],["CaCl2",0.03,"kg"]]},
+"Chaas":{output:50,unit:"L",ingredients:[["Curd",19,"kg"],["Water",33,"L"]]},
+"Sweet Lassi":{output:20,unit:"kg",ingredients:[["Curd",19,"kg"],["Syrup",7.98,"kg"]]},
+"Mango Lassi":{output:20,unit:"kg",ingredients:[["Curd",15,"kg"],["Syrup",6.3,"kg"],["Pulp",0.852,"kg"]]},
+"CM Khoya":{output:20,unit:"kg",ingredients:[["CM",49,"L"],["SM",11,"L"],["SMP",2,"kg"]]},
+"Shrikhand":{output:20,unit:"kg",ingredients:[["Chakka",13.2,"kg"],["Sugar",9.9,"kg"]]}
 };
 
-const productSelect=document.getElementById("product");
+const p=document.getElementById("product");
+Object.keys(recipes).forEach(x=>{let o=document.createElement("option");o.value=x;o.text=x;p.add(o);});
 
-Object.keys(recipes).forEach(p=>{
-    const option=document.createElement("option");
-    option.value=p;
-    option.textContent=p;
-    productSelect.appendChild(option);
-});
+function calculateMilkPool(){
+ let bmQty=0,bmFatKg=0,bmSnfKg=0,cmQty=0,cmFatKg=0,cmSnfKg=0;
+ for(let i=1;i<=5;i++){
+  let bq=+document.getElementById(`v${i}BmQty`).value||0;
+  let bf=+document.getElementById(`v${i}BmFat`).value||0;
+  let bs=+document.getElementById(`v${i}BmSnf`).value||0;
+  bmQty+=bq; bmFatKg+=(bq*bf)/100; bmSnfKg+=(bq*bs)/100;
 
-generateRecipe();
+  let cq=+document.getElementById(`v${i}CmQty`).value||0;
+  let cf=+document.getElementById(`v${i}CmFat`).value||0;
+  let cs=+document.getElementById(`v${i}CmSnf`).value||0;
+  cmQty+=cq; cmFatKg+=(cq*cf)/100; cmSnfKg+=(cq*cs)/100;
+ }
+ let bmFat=bmQty?(bmFatKg/bmQty)*100:0;
+ let bmSnf=bmQty?(bmSnfKg/bmQty)*100:0;
+ let cmFat=cmQty?(cmFatKg/cmQty)*100:0;
+ let cmSnf=cmQty?(cmSnfKg/cmQty)*100:0;
+ let freshCream=cmFatKg/0.60;
+ let generatedSM=Math.max(0,cmQty-freshCream);
+
+ document.getElementById("milkSummary").innerHTML=`
+ <hr><b>BM Pool</b><br>Qty ${bmQty.toFixed(1)} L | Fat ${bmFat.toFixed(2)}% | SNF ${bmSnf.toFixed(2)}%
+ <br><br><b>CM Pool</b><br>Qty ${cmQty.toFixed(1)} L | Fat ${cmFat.toFixed(2)}% | SNF ${cmSnf.toFixed(2)}%
+ <br><br><b>Fresh Cream:</b> ${freshCream.toFixed(2)} kg
+ <br><b>Generated SM:</b> ${generatedSM.toFixed(1)} L (Fat 0.1%, SNF ${cmSnf.toFixed(2)}%)
+ `;
+}
 
 function generateRecipe(){
-
-    const product=productSelect.value;
-    const reqQty=parseFloat(
-        document.getElementById("outputQty").value
-    );
-
-    const recipe=recipes[product];
-
-    const factor=reqQty/recipe.output;
-
-    let text="GAAVN PRODUCTION RECIPE\n\n";
-
-    text+="Product: "+product+"\n";
-    text+="Target Output: "+reqQty+" "+recipe.unit+"\n\n";
-
-    recipe.ingredients.forEach(i=>{
-
-        const qty=(i[1]*factor);
-
-        text+=
-        i[0]+": "
-        +qty.toFixed(3)
-        +" "
-        +i[2]
-        +"\n";
-
-    });
-
-    document.getElementById("recipeOutput")
-    .textContent=text;
+ const r=recipes[p.value];
+ const factor=(+document.getElementById("outputQty").value||0)/r.output;
+ let t=`GAAVN PRODUCTION RECIPE\n\nProduct: ${p.value}\nTarget Output: ${document.getElementById("outputQty").value} ${r.unit}\n\n`;
+ r.ingredients.forEach(i=>t+=`${i[0]}: ${(i[1]*factor).toFixed(3)} ${i[2]}\n`);
+ document.getElementById("recipeOutput").textContent=t;
 }
-
-function copyRecipe(){
-
-    const txt=
-    document.getElementById("recipeOutput")
-    .textContent;
-
-    navigator.clipboard.writeText(txt);
-
-    alert("Recipe copied");
-}
-function calculateMilkPool(){
-
-const vendors = [
-
-{
-qty:Number(document.getElementById('v1Qty').value||0),
-fat:Number(document.getElementById('v1Fat').value||0),
-snf:Number(document.getElementById('v1Snf').value||0)
-},
-
-{
-qty:Number(document.getElementById('v2Qty').value||0),
-fat:Number(document.getElementById('v2Fat').value||0),
-snf:Number(document.getElementById('v2Snf').value||0)
-},
-
-{
-qty:Number(document.getElementById('v3Qty').value||0),
-fat:Number(document.getElementById('v3Fat').value||0),
-snf:Number(document.getElementById('v3Snf').value||0)
-},
-
-{
-qty:Number(document.getElementById('v4aQty').value||0),
-fat:Number(document.getElementById('v4aFat').value||0),
-snf:Number(document.getElementById('v4aSnf').value||0)
-},
-
-{
-qty:Number(document.getElementById('v4pQty').value||0),
-fat:Number(document.getElementById('v4pFat').value||0),
-snf:Number(document.getElementById('v4pSnf').value||0)
-}
-
-];
-
-let totalQty = 0;
-let totalFatKg = 0;
-let totalSnfKg = 0;
-
-vendors.forEach(v=>{
-
-totalQty += v.qty;
-totalFatKg += (v.qty*v.fat)/100;
-totalSnfKg += (v.qty*v.snf)/100;
-
-});
-
-let avgFat = 0;
-let avgSnf = 0;
-
-if(totalQty>0){
-
-avgFat = (totalFatKg/totalQty)*100;
-avgSnf = (totalSnfKg/totalQty)*100;
-
-}
-
-const cmQty =
-Number(document.getElementById('cmQty').value||0);
-
-const cmFat =
-Number(document.getElementById('cmFat').value||0);
-
-const fatKgInCM =
-(cmQty*cmFat)/100;
-
-const freshCreamAvailable =
-fatKgInCM/0.60;
-
-localStorage.setItem(
-'gaavnAvgFat',
-avgFat
-);
-
-localStorage.setItem(
-'gaavnAvgSnf',
-avgSnf
-);
-
-localStorage.setItem(
-'gaavnFreshCream',
-freshCreamAvailable
-);
-
-document.getElementById('milkSummary').innerHTML = `
-
-<b>Total BM Qty:</b> ${totalQty.toFixed(1)} L
-<br>
-
-<b>Weighted Fat:</b> ${avgFat.toFixed(2)} %
-<br>
-
-<b>Weighted SNF:</b> ${avgSnf.toFixed(2)} %
-<br>
-
-<b>Fresh Cream Available:</b> ${freshCreamAvailable.toFixed(2)} kg
-
-`;
-
-}
-productSelect.addEventListener(
-    "change",
-    generateRecipe
-);
-
-document.getElementById("outputQty")
-.addEventListener(
-    "input",
-    generateRecipe
-);
-
+function copyRecipe(){navigator.clipboard.writeText(document.getElementById("recipeOutput").textContent);alert("Recipe copied");}
+p.addEventListener("change",generateRecipe);
+document.getElementById("outputQty").addEventListener("input",generateRecipe);
+generateRecipe();
 </script>
-
 </body>
 </html>
