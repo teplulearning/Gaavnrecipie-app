@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>GAAVN Recipe Generator</title>
+
+<style>
+body{
+    font-family:Arial,sans-serif;
+    padding:20px;
+    background:#f5f5f5;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    margin-bottom:15px;
+    box-shadow:0 2px 6px rgba(0,0,0,.1);
+}
+
+input,select{
+    width:100%;
+    padding:10px;
+    margin-top:5px;
+    margin-bottom:15px;
+}
+
+button{
+    padding:12px 20px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    margin-right:10px;
+}
+
+.primary{
+    background:#2e7d32;
+    color:white;
+}
+
+.secondary{
+    background:#1565c0;
+    color:white;
+}
+
+pre{
+    white-space:pre-wrap;
+}
+</style>
+</head>
+
+<body>
+
+<h2>GAAVN Recipe Generator</h2>
+
+<div class="card">
+
+<label>Product</label>
+<select id="product"></select>
+
+<label>Required Output</label>
+<input type="number" id="outputQty" value="100">
+
+<button class="primary" onclick="generateRecipe()">
+Generate Recipe
+</button>
+
+</div>
+
+<div class="card">
+
+<h3>Recipe</h3>
+
+<pre id="recipeOutput"></pre>
+
+<button class="secondary" onclick="copyRecipe()">
+Copy Recipe
+</button>
+
+</div>
+
+<script>
+
+const recipes = {
+
+"Medium Fat Paneer":{
+    output:100,
+    unit:"kg",
+    ingredients:[
+        ["BM",100,"L"],
+        ["SM",595,"L"],
+        ["Cream",8.74,"kg"],
+        ["PS",0.291,"kg"],
+        ["CaCl2",0.417,"kg"],
+        ["AA",695,"ml"],
+        ["Water",139,"L"]
+    ]
+},
+
+"Malai Paneer":{
+    output:14,
+    unit:"kg",
+    ingredients:[
+        ["BM",25,"L"],
+        ["SM",15,"L"],
+        ["Cream",0.645,"kg"],
+        ["PS",0.0168,"kg"],
+        ["CaCl2",0.024,"kg"]
+    ]
+},
+
+"Lite Curd":{
+    output:100,
+    unit:"kg",
+    ingredients:[
+        ["SM",100,"L"],
+        ["SMP",2.6,"kg"],
+        ["Binder",10,"gm"],
+        ["CaCl2",0.03,"kg"]
+    ]
+},
+
+"Chaas":{
+    output:50,
+    unit:"L",
+    ingredients:[
+        ["Curd",19,"kg"],
+        ["Water",33,"L"],
+        ["White Salt",0.312,"kg"],
+        ["Black Salt",0.0078,"kg"]
+    ]
+},
+
+"Sweet Lassi":{
+    output:20,
+    unit:"kg",
+    ingredients:[
+        ["Curd",19,"kg"],
+        ["Syrup",7.98,"kg"],
+        ["Salt",0.01688,"kg"],
+        ["PS",0.01349,"kg"],
+        ["Flavour",18.8,"ml"]
+    ]
+},
+
+"Mango Lassi":{
+    output:20,
+    unit:"kg",
+    ingredients:[
+        ["Curd",15,"kg"],
+        ["Syrup",6.3,"kg"],
+        ["Pulp",0.852,"kg"],
+        ["Salt",0.01278,"kg"],
+        ["PS",0.01065,"kg"],
+        ["TR",10.65,"ml"],
+        ["OR",10.65,"ml"],
+        ["Flavour",10.65,"ml"]
+    ]
+},
+
+"CM Khoya":{
+    output:20,
+    unit:"kg",
+    ingredients:[
+        ["CM",49,"L"],
+        ["SM",11,"L"],
+        ["SMP",2,"kg"]
+    ]
+},
+
+"Shrikhand":{
+    output:20,
+    unit:"kg",
+    ingredients:[
+        ["Chakka",13.2,"kg"],
+        ["Sugar",9.9,"kg"],
+        ["Salt",0.01386,"kg"],
+        ["Flavour",0.05,"%"],
+        ["Cardamom",0.07,"%"]
+    ]
+}
+
+};
+
+const productSelect=document.getElementById("product");
+
+Object.keys(recipes).forEach(p=>{
+    const option=document.createElement("option");
+    option.value=p;
+    option.textContent=p;
+    productSelect.appendChild(option);
+});
+
+generateRecipe();
+
+function generateRecipe(){
+
+    const product=productSelect.value;
+    const reqQty=parseFloat(
+        document.getElementById("outputQty").value
+    );
+
+    const recipe=recipes[product];
+
+    const factor=reqQty/recipe.output;
+
+    let text="GAAVN PRODUCTION RECIPE\n\n";
+
+    text+="Product: "+product+"\n";
+    text+="Target Output: "+reqQty+" "+recipe.unit+"\n\n";
+
+    recipe.ingredients.forEach(i=>{
+
+        const qty=(i[1]*factor);
+
+        text+=
+        i[0]+": "
+        +qty.toFixed(3)
+        +" "
+        +i[2]
+        +"\n";
+
+    });
+
+    document.getElementById("recipeOutput")
+    .textContent=text;
+}
+
+function copyRecipe(){
+
+    const txt=
+    document.getElementById("recipeOutput")
+    .textContent;
+
+    navigator.clipboard.writeText(txt);
+
+    alert("Recipe copied");
+}
+
+productSelect.addEventListener(
+    "change",
+    generateRecipe
+);
+
+document.getElementById("outputQty")
+.addEventListener(
+    "input",
+    generateRecipe
+);
+
+</script>
+
+</body>
+</html>
